@@ -1,49 +1,49 @@
-#include "bits/stdc++.h"
+ï»¿#include "bits/stdc++.h"
 
-// ¹éÁØ 2178¹ø ¹Ì·Î Å½»ö ¹®Á¦
+// ë°±ì¤€ 2178ë²ˆ ë¯¸ë¡œ íƒìƒ‰ ë¬¸ì œ
 using namespace std;
 
-// ³Êºñ ¿ì¼± Å½»öÀ¸·Î ¹Ì·Î Å½»ö
-int bfs(vector<vector<int>>& maze, int row, int column) //row¿Í columnÀº ¸ñÀûÁö Á¤º¸°¡ µÊ
+// ë„ˆë¹„ ìš°ì„  íƒìƒ‰ìœ¼ë¡œ ë¯¸ë¡œ íƒìƒ‰
+int bfs(vector<vector<int>>& maze, int row, int column) //rowì™€ columnì€ ëª©ì ì§€ ì •ë³´ê°€ ë¨
 {
-	vector<vector<int>> visit = maze; // ¹æ¹® ¹× °Å¸® Á¤º¸
+	vector<vector<int>> visit = maze; // ë°©ë¬¸ ë° ê±°ë¦¬ ì •ë³´
 	for (vector<int>& v : visit)
 	{
 		for (int& i : v)
 		{
-			i--; // ÀÌµ¿ °¡´ÉÇÑ °÷Àº 0À¸·Î ºÒ°¡´ÉÇÑ °÷Àº -1·Î
+			i--; // ì´ë™ ê°€ëŠ¥í•œ ê³³ì€ 0ìœ¼ë¡œ ë¶ˆê°€ëŠ¥í•œ ê³³ì€ -1ë¡œ
 		}
 	}
 
-	queue<pair<int, int>> bfsQueue;	//¹æ¹® ³ëµå Å¥
+	queue<pair<int, int>> bfsQueue;	//ë°©ë¬¸ ë…¸ë“œ í
 	
 	visit[0][0] = 1;
 	bfsQueue.push({ 0,0 });
 	pair<int, int> currentIndex;
-	while (!bfsQueue.empty()) //Å¥°¡ ºñ¿öÁöÁö ¾ÊÀ» µ¿¾È ¹İº¹
+	while (!bfsQueue.empty()) //íê°€ ë¹„ì›Œì§€ì§€ ì•Šì„ ë™ì•ˆ ë°˜ë³µ
 	{
 		currentIndex = bfsQueue.front();
-		bfsQueue.pop(); // ²¨³½ ³ëµå °ª Á¦°Å
-		if (currentIndex == pair<int, int>(row - 1, column - 1))//ÇöÀç ³ëµå°¡ ¸ñÀûÁö¶ó¸é ´Ù¸¥ Å½»ö °úÁ¤Àº ÇÊ¿ä ¾øÀ½
+		bfsQueue.pop(); // êº¼ë‚¸ ë…¸ë“œ ê°’ ì œê±°
+		if (currentIndex == pair<int, int>(row - 1, column - 1))//í˜„ì¬ ë…¸ë“œê°€ ëª©ì ì§€ë¼ë©´ ë‹¤ë¥¸ íƒìƒ‰ ê³¼ì •ì€ í•„ìš” ì—†ìŒ
 			break;
 
-		// ´ÙÀ½ Ä­ÀÌ ÀÌµ¿ °¡´ÉÇÑ Ä­ÀÎÁö ¹æ¹®ÇÏÁö ¾Ê¾Ò´ø Ä­ÀÎÁö ÆÇ´Ü
-		if (currentIndex.first - 1 >= 0 && visit[currentIndex.first - 1][currentIndex.second] == 0)				//ÁÂ
+		// ë‹¤ìŒ ì¹¸ì´ ì´ë™ ê°€ëŠ¥í•œ ì¹¸ì¸ì§€ ë°©ë¬¸í•˜ì§€ ì•Šì•˜ë˜ ì¹¸ì¸ì§€ íŒë‹¨
+		if (currentIndex.first - 1 >= 0 && visit[currentIndex.first - 1][currentIndex.second] == 0)				//ì¢Œ
 		{
-			visit[currentIndex.first - 1][currentIndex.second] = visit[currentIndex.first][currentIndex.second] + 1;		//¹æ¹®Çß´ÂÁö Ç¥½Ã¿Í ÇÔ²² °Å¸® ÃøÁ¤ - ÇöÀç ³ëµå¿¡ + 1 ÇÏ¸é ´ÙÀ½ ³ëµå±îÁöÀÇ °Å¸®°¡ µÈ´Ù.
-			bfsQueue.push({ currentIndex.first - 1 ,currentIndex.second });		//¹æ¹®ÇÑ ³ëµå Å¥¿¡ »ğÀÔ
+			visit[currentIndex.first - 1][currentIndex.second] = visit[currentIndex.first][currentIndex.second] + 1;		//ë°©ë¬¸í–ˆëŠ”ì§€ í‘œì‹œì™€ í•¨ê»˜ ê±°ë¦¬ ì¸¡ì • - í˜„ì¬ ë…¸ë“œì— + 1 í•˜ë©´ ë‹¤ìŒ ë…¸ë“œê¹Œì§€ì˜ ê±°ë¦¬ê°€ ëœë‹¤.
+			bfsQueue.push({ currentIndex.first - 1 ,currentIndex.second });		//ë°©ë¬¸í•œ ë…¸ë“œ íì— ì‚½ì…
 		}
-		if (currentIndex.first + 1 < row && visit[currentIndex.first + 1][currentIndex.second] == 0)	//¿ì
+		if (currentIndex.first + 1 < row && visit[currentIndex.first + 1][currentIndex.second] == 0)		//ìš°
 		{
 			visit[currentIndex.first + 1][currentIndex.second] = visit[currentIndex.first][currentIndex.second] + 1;
 			bfsQueue.push({ currentIndex.first + 1 ,currentIndex.second });
 		}
-		if (currentIndex.second - 1 >= 0 && visit[currentIndex.first][currentIndex.second - 1] == 0)		//»ó
+		if (currentIndex.second - 1 >= 0 && visit[currentIndex.first][currentIndex.second - 1] == 0)		//ìƒ
 		{
 			visit[currentIndex.first][currentIndex.second - 1] = visit[currentIndex.first][currentIndex.second] + 1;		
 			bfsQueue.push({ currentIndex.first ,currentIndex.second - 1 });
 		}
-		if (currentIndex.second + 1 < column && visit[currentIndex.first][currentIndex.second + 1] == 0)		//ÇÏ
+		if (currentIndex.second + 1 < column && visit[currentIndex.first][currentIndex.second + 1] == 0)		//í•˜
 		{
 			visit[currentIndex.first][currentIndex.second + 1] = visit[currentIndex.first][currentIndex.second] + 1;		
 			bfsQueue.push({ currentIndex.first ,currentIndex.second + 1 });
@@ -53,7 +53,7 @@ int bfs(vector<vector<int>>& maze, int row, int column) //row¿Í columnÀº ¸ñÀûÁö 
 
 	}
 
-	// ¸ñÀûÁö ³ëµåÀÇ °ª ¹İÈ¯
+	// ëª©ì ì§€ ë…¸ë“œì˜ ê°’ ë°˜í™˜
 	return visit[currentIndex.first][currentIndex.second];
 
 
@@ -68,16 +68,16 @@ int main()
 	cin >> column;
 	vector<vector<int>> maze;
 	cin.ignore();
-	// Á¤ÇØÁø °ø°£ ÇÒ´ç
+	// ì •í•´ì§„ ê³µê°„ í• ë‹¹
 	maze.resize(row);
 	for (int i = 0; i < row; ++i)
 	{	
 		maze[i].resize(column);
 		string s;
-		getline(cin, s);		//¹Ì·Î Á¤º¸ ¹Ş±â
+		getline(cin, s);		//ë¯¸ë¡œ ì •ë³´ ë°›ê¸°
 		for (int j = 0; j < column; ++j)
 		{
-			maze[i][j] = s[j] - '0'; // char¸¦ int·Î º¯È¯
+			maze[i][j] = s[j] - '0'; // charë¥¼ intë¡œ ë³€í™˜
 		}
 	}
 

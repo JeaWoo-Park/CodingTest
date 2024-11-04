@@ -1,22 +1,22 @@
-#include "bits/stdc++.h"
+ï»¿#include "bits/stdc++.h"
 
-// ¹éÁØ 2178¹ø ±×¸² ¹®Á¦
+// ë°±ì¤€ 2178ë²ˆ ê·¸ë¦¼ ë¬¸ì œ
 using namespace std;
 
-// i j ºÎÅÍ Å½»ö ½ÃÀÛ
+// i j ë¶€í„° íƒìƒ‰ ì‹œì‘
 int bfs(vector<vector<int>>& visit,int i, int j, int row, int column)
 {
 	queue<pair<int, int>> bfsQueue;
 	bfsQueue.push({ i,j });
-	visit[i][j] = 0;	//¹æ¹®ÇÑ ³ëµå´Â 0À¸·Î ¹Ù²Ş
+	visit[i][j] = 0;	//ë°©ë¬¸í•œ ë…¸ë“œëŠ” 0ìœ¼ë¡œ ë°”ê¿ˆ
 	pair<int, int> currentIndex;
 
-	int size = 0;	//±×¸²ÀÇ ³ĞÀÌ
+	int size = 0;	//ê·¸ë¦¼ì˜ ë„“ì´
 	while (!bfsQueue.empty())
 	{
 		currentIndex =  bfsQueue.front();
-		bfsQueue.pop(); //²¨³½ °ª Á¦°Å
-		++size; //°ªÀ» ²¨³¾ ¶§ ¸¶´Ù ±×¸²Å©±â Áõ°¡
+		bfsQueue.pop(); //êº¼ë‚¸ ê°’ ì œê±°
+		++size; //ê°’ì„ êº¼ë‚¼ ë•Œ ë§ˆë‹¤ ê·¸ë¦¼í¬ê¸° ì¦ê°€
 		if (currentIndex.first - 1 >= 0 && visit[currentIndex.first - 1][currentIndex.second] == 1)
 		{
 			visit[currentIndex.first - 1][currentIndex.second] = 0;
@@ -46,22 +46,22 @@ int bfs(vector<vector<int>>& visit,int i, int j, int row, int column)
 
 pair<int,int> solution(vector<vector<int>>& paint, int row, int column)
 {
-	int paintCnt = 0; //±×¸²ÀÇ °³¼ö
-	int maxSize = 0;  //±×¸²ÀÇ ÃÖ´ëÅ©±â
-	int tempSize = 0; //±×¸²ÀÇ Å©±â¸¦ ¹Ş¾Æ µÑ ÀÓ½Ã º¯¼ö
+	int paintCnt = 0; //ê·¸ë¦¼ì˜ ê°œìˆ˜
+	int maxSize = 0;  //ê·¸ë¦¼ì˜ ìµœëŒ€í¬ê¸°
+	int tempSize = 0; //ê·¸ë¦¼ì˜ í¬ê¸°ë¥¼ ë°›ì•„ ë‘˜ ì„ì‹œ ë³€ìˆ˜
 	vector<vector<int>> visit = paint;
 
 	for (int j = 0; j < column; ++j)
 	{
 		for (int i = 0; i < row; ++i)
 		{
-			if (visit[i][j] == 1) //±×¸²ÀÇ ¿µ¿ªÀÌ¸é bfsÅ½»ö
+			if (visit[i][j] == 1) //ê·¸ë¦¼ì˜ ì˜ì—­ì´ë©´ bfsíƒìƒ‰
 			{
 				tempSize = bfs(visit, i, j, row, column);
 				if (maxSize < tempSize)
 					maxSize = tempSize;
 
-				++paintCnt; //Å½»öÀÌ ½ÃÇà µÇ¸é ±×¸²ÀÌ ÇÏ³ª ÀÖ´Ù´Â ¶æ
+				++paintCnt; //íƒìƒ‰ì´ ì‹œí–‰ ë˜ë©´ ê·¸ë¦¼ì´ í•˜ë‚˜ ìˆë‹¤ëŠ” ëœ»
 			}
 		}
 	}
@@ -79,14 +79,14 @@ int main()
 	cin >> column;
 	vector<vector<int>> paint;
 	cin.ignore();
-	// Á¤ÇØÁø °ø°£ ÇÒ´ç
+	// ì •í•´ì§„ ê³µê°„ í• ë‹¹
 	paint.resize(row);
 	for (int i = 0; i < row; ++i)
 	{
 		paint[i].resize(column);
 		for (int j = 0; j < column; ++j)
 		{
-			cin >> paint[i][j]; //¹Ì·Î ÇÑÄ­ÇÑÄ­ÀÇ Á¤º¸ ¹Ş±â
+			cin >> paint[i][j]; //ë¯¸ë¡œ í•œì¹¸í•œì¹¸ì˜ ì •ë³´ ë°›ê¸°
 		}
 	}
 
@@ -94,5 +94,5 @@ int main()
 
 	cout << result.first << "\n" << result.second;
 
-	return 0;
+	return 0; 
 }
