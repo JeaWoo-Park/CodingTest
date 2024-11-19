@@ -16,7 +16,7 @@ void Track(vector<pair<int,int>>& Queens, int cnt, int& result)
 	for (int i = 0; i < N; ++i)
 	{
 		bool valid = true;
-		for (auto q : Queens)
+		for (auto q : Queens)		//퀸의 공격 사정권
 		{
 			if (q.second == i) valid = false;
 			if (q.first + q.second == i + cnt) valid = false;
@@ -24,7 +24,7 @@ void Track(vector<pair<int,int>>& Queens, int cnt, int& result)
 		}
 		if (valid)
 		{
-			Queens.push_back({ cnt,i });
+			Queens.push_back({ cnt,i });	//퀸 리스트 추가
 			Track(Queens, cnt + 1, result);
 			Queens.pop_back();
 		}

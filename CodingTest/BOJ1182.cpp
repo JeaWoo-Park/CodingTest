@@ -11,13 +11,13 @@ void Track(vector<int>& nums, int cnt, int sum = 0)
 	{
 		return;
 	}
-	Track(nums, cnt + 1, sum);
-	sum += nums[cnt];
-	if (sum == s)
+	Track(nums, cnt + 1, sum);		// 해당 인덱스 합 안한 상태로 다음단계로
+	sum += nums[cnt];				// 해당 인덱스 합
+	if (sum == s)					// 목표 도달 확인
 	{
 		++result;
 	}
-	Track(nums, cnt + 1, sum);
+	Track(nums, cnt + 1, sum);		// 합 한 값으로 다음 단계로
 
 }
 
